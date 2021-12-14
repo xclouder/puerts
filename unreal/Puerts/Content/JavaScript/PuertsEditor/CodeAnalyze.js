@@ -965,10 +965,10 @@ function getCustomSystem() {
         throw new Error("exit with code:" + exitCode);
     }
     function getExecutingFilePath() {
-        return getCurrentDirectory() + "Content/JavaScript/PuertsEditor/node_modules/typescript/lib/tsc.js";
+        return UE.FileSystemOperation.GetCurrentDirectory() + "Content/JavaScript/PuertsEditor/node_modules/typescript/lib/tsc.js";
     }
     function getCurrentDirectory() {
-        return UE.FileSystemOperation.GetCurrentDirectory();
+        return UE.FileSystemOperation.GetCurrentDirectory() + "TsProject/";
     }
     function getDirectories(path) {
         let result = [];
@@ -1433,7 +1433,7 @@ function watch(configFilePath) {
                 if (!type)
                     return undefined;
                 try {
-                    let typeNode = checker.typeToTypeNode(type);
+                    let typeNode = checker.typeToTypeNode(type, undefined, undefined);
                     //console.log(checker.typeToString(type), tds)
                     if (ts.isTypeReferenceNode(typeNode) && type.symbol) {
                         let typeName = type.symbol.getName();
